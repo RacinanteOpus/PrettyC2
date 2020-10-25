@@ -1,3 +1,3 @@
-# PrettyC2
+# PrettyC2Test
 
-MrTrivel's PrettyC2Tables with sort capabilities by clicking on the column headers.
+MrTrivel's PrettyC2Tables with sort capabilities by clicking on the column headers and "what-if" scenarios.
