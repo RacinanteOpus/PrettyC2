@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Pretty C2 Tables</title>
+    <link rel="stylesheet" type="text/css" href="prettify.css">
+    <script language="javascript" src="lz-string.js"></script>
+    <script type="text/javascript" src="tables.js"></script>
+    <script src="sortable.min.js"></script>
+  </head>
+  <body>
+
+  <textarea id="foo" onpaste="doClick()" placeholder="Paste Trimps save string in here, ah."></textarea>
+
+  <br><br>
+
+  <button onclick="doClick()">
+    Get Pretty Challenge Tables
+  </button>
+
+  <p></p>
+
+  <div class="datagrid">
+	<table border="0" id="challenges">
+		<tr>
+			<td>
+				<table border="1"  id="c2table" class="sortable">
+					<thead>
+						<tr>
+							<th>Basic<br>Helium<br>Challenge</th>
+							<th class="sorttable_numeric">HZE</th>
+							<th class="sorttable_numeric">C2%</th>
+							<th class="sorttable_nosort">What<br>If?</th>
+							<th class="sorttable_nosort">New<br>C2%</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+					<tfoot>
+					</tfoot>
+				</table>
+			</td>
+			
+			<td>
+				<table border="1"  id="c2table2" class="sortable">
+					<thead>
+						<tr>
+							<th>Complex<br>Helium<br>Challenge</th>
+							<th class="sorttable_numeric">HZE</th>
+							<th class="sorttable_numeric">C2%</th>
+							<th class="sorttable_nosort">What<br>If?</th>
+							<th class="sorttable_nosort">New<br>C2%</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+					<tfoot>
+					</tfoot>
+				</table>
+			</td>
+			
+			<td>
+				<table border="1"  id="c3table" class="sortable">
+					<thead>
+						<tr>
+							<th>Radon<br>Challenge</th>
+							<th class="sorttable_numeric">HZE</th>
+							<th class="sorttable_numeric">C3%</th>
+							<th class="sorttable_nosort">What<br>If?</th>
+							<th class="sorttable_nosort">New<br>C3%</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+					<tfoot>
+					</tfoot>
+				</table>
+			</td>
+		</tr>
+	  </table>
+  </div>
+
+  </body>
+</html>

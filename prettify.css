@@ -1,0 +1,117 @@
+table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after { 
+    content: " \25B4\25BE" ;
+    font-size: 10px;
+    text-align: right;  
+}
+
+table.sortable tbody tr:nth-child(2n) td {
+  background: #17252A;
+}
+table.sortable tbody tr:nth-child(2n+1) td {
+  background: #161a28;
+}
+table tbody tr td {
+   vertical-align: top;
+}
+body
+{
+    background-color: #17252A;
+    position: absolute;
+    top: 10%;
+    left: 5%;
+}
+
+.datagrid table 
+{
+  border-collapse: collapse;
+  text-align: left;
+  /*width: 60%;*/
+}
+
+.datagrid 
+{
+  font: normal 12px/150% Courier New, Courier, monospace;
+  background: #17252A;
+  overflow: hidden;
+  border: 10px solid #2B7A78;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+  
+.datagrid table td, .datagrid table th 
+{
+  padding: 5px 10px;
+}
+
+.datagrid table thead th 
+{
+  background: webkit-gradient(linear, left top, left bottom, color-stop(0.05, #2B7A78), color-stop(1, #2B7A78));
+  background: moz-linear-gradient(center top, #2B7A78 5%, #2B7A78 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2B7A78', endColorstr='#2B7A78');
+  background-color: #2B7A78;
+  color: #FEFFFF;
+  font-size: 19px;
+  font-weight: bold;
+  border-left: 1px solid #17252A;
+  border-bottom: 1px solid #17252A;
+}
+
+.datagrid table thead th:first-child 
+{
+  border-left: 1px solid #17252A;
+  border-bottom: 1px solid #17252A;
+}
+
+.datagrid table tbody td 
+{
+  color: #DEF2F1;
+  border-left: 1px solid #2B7A78;
+  border-bottom: 1px solid #2B7A78;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.datagrid table tfoot td 
+{
+  color: #FEFFFF;
+  border-left: 1px solid #2B7A78;
+  border-bottom: 1px solid #2B7A78;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.datagridCell
+{
+  color: #DEF2F1;
+  border-left: 1px solid #2B7A78;
+  border-bottom: 1px solid #2B7A78;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.datagridCellAlt
+{
+  background: #161a28;
+  color: #DEF2F1;
+  border-left: 1px solid #2B7A78;
+  border-bottom: 1px solid #2B7A78;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.datagrid table tbody tr .alt 
+{
+  background: #161a28;
+  color: #DEF2F1;
+}
+
+.datagrid table tbody td:first-child 
+{
+  border-left: 1px solid #2B7A78;
+}
+
+.datagrid table tbody tr:last-child td 
+{
+  border-bottom: none;
+}
