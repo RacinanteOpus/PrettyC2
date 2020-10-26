@@ -12,6 +12,7 @@ function doReset() {
 	for (myInput in myElements) {
 	   if myInput.hasAttribute("name") {
 	      myInput.value = validC2s[myInput.name];
+	   }
 	}
 //	for (myKey in validC2s) {
 //		challenge = myKey;
