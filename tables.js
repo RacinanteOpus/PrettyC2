@@ -8,11 +8,9 @@ function doReset() {
 	var validC2s = game.c2;
 	var challenge;
 	var level;
-//	for (i = 0; i < validC2s.length; i++) {
 	for (myKey in validC2s) {
 		challenge = myKey;
 		level = validC2s[myKey];
-		alert(challenge+" "+level);
 	}
 }
 function updateC2(challenge,val) {
