@@ -1,4 +1,4 @@
-
+var game="";
 function numberWithCommas(x,y) {
     return x.toFixed(y).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
@@ -178,7 +178,7 @@ function doClick() {
     var specialC2s = ["Trimp"];
     var challengesU2 = ["Unlucky", "Downsize", "Transmute", "Unbalance", "Duel"];
 
-    var game = JSON.parse(LZString.decompressFromBase64(foo.value));
+    game = JSON.parse(LZString.decompressFromBase64(foo.value));
     foo.value = "";
 
     var hasMesmer = game.talents.mesmer.purchased;
@@ -234,8 +234,9 @@ function doClick() {
         cellC2Percent.innerHTML = numberWithCommas(getBasicC2(c2HZE, hasMesmer),0) + "%";
      	cellC2Percent.style.textAlign = "right";
         cellWIPct.innerHTML = numberWithCommas(getBasicC2(c2HZE, hasMesmer),0) + "%";
-     	cellWIPct.setAttribute("id","C");
+     	cellWIPct.setAttribute("id",key+"C");
      	cellWIPct.setAttribute("name","c2");
+	cellWIPct.style.textAlign = "right";
      	cellWIPct.title = getBasicC2(c2HZE, hasMesmer);
      }
 
@@ -305,7 +306,7 @@ function doClick() {
     c1cellC2PercentT.style.textAlign = "right";
     c1cellWIPct.innerHTML = numberWithCommas(c1,0) + "%";
     c1cellWIPct.style.textAlign = "right";
-    c1cellWIPct.id="TotalC";
+    c1cellWIPct.setAttribute("id","TotalC");
     c1cellWIPct.title = c1;
 
     var c2rowTotal = footer2.insertRow(0);
