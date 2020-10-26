@@ -8,10 +8,14 @@ function doReset() {
 	var validC2s = game.c2;
 	var challenge;
 	var level;
+	var i;
+	var myElement;
 	var myElements = document.getElementsByTagName("input");
-	for (myInput in myElements) {
-	   if myInput.hasAttribute("name") {
-	      myInput.value = validC2s[myInput.name];
+	
+	for (i = 0; i < myElements.length; i++) {
+	    myElement = myElements[i];
+            if myElement.hasAttribute("name") {
+	       myElement.value = validC2s[myElement.name];
 	   }
 	}
 //	for (myKey in validC2s) {
