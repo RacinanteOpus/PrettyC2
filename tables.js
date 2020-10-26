@@ -6,10 +6,10 @@ function numberWithCommas(x,y) {
 function myToggle() {
   var x = document.getElementsByClassName("hideme");
   for (var i = 0; i < x.length; i++) {
-  if (x[i].style.display === "none") {
-    	x[i].style.display = "table-cell";
-  	} else {
+  if (x[i].style.display === "table-cell") {
     	x[i].style.display = "none";
+  	} else {
+    	x[i].style.display = "table-cell";
 	}
   }
 }
