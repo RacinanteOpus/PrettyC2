@@ -3,6 +3,9 @@ function numberWithCommas(x,y) {
     return x.toFixed(y).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+function doReset() {
+	alert("Not yet....");
+}
 function updateC2(challenge,val) {
     	var hasMesmer = game.talents.mesmer.purchased;
 	document.getElementById(challenge+"C").innerHTML = numberWithCommas(getBasicC2(val, hasMesmer, challenge),0) + '%';
