@@ -5,8 +5,8 @@ function numberWithCommas(x,y) {
 
 function updateC2(challenge,val) {
     	var hasMesmer = game.talents.mesmer.purchased;
-	document.getElementById(challenge+"C").innerHTML = numberWithCommas(getBasicC2(val, hasMesmer),0) + '%';
-	document.getElementById(challenge+"C").title = getBasicC2(val, hasMesmer);
+	document.getElementById(challenge+"C").innerHTML = numberWithCommas(getBasicC2(val, hasMesmer, challenge),0) + '%';
+	document.getElementById(challenge+"C").title = getBasicC2(val, hasMesmer, challenge);
 	updateWhatIf();
 }
 
