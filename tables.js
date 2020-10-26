@@ -17,11 +17,20 @@ function doReset() {
 	       myElements[i].value = validC2s[myElements[i].name];
 	   }
 	}
-//	for (myKey in validC2s) {
-//		challenge = myKey;
-//		level = validC2s[myKey];
-//	}
+	for (myKey in validC2s) {
+		challenge = myKey;
+		level = validC2s[myKey];
+		updateC2reset(challenge,level)
+	}
+	updateWhatIf();
 }
+
+function updateC2reset(challenge,val) {
+    	var hasMesmer = game.talents.mesmer.purchased;
+	document.getElementById(challenge+"C").innerHTML = numberWithCommas(getBasicC2(val, hasMesmer, challenge),0) + '%';
+	document.getElementById(challenge+"C").title = getBasicC2(val, hasMesmer, challenge);
+}
+
 function updateC2(challenge,val) {
     	var hasMesmer = game.talents.mesmer.purchased;
 	document.getElementById(challenge+"C").innerHTML = numberWithCommas(getBasicC2(val, hasMesmer, challenge),0) + '%';
