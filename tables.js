@@ -381,10 +381,10 @@ function doClick() {
     c2cellTotalT.style.whiteSpace="nowrap";
     c2cellC2PercentTT.innerHTML = numberWithCommas(c2+c1,0) + "%";
     c2cellC2PercentTT.style.textAlign = "right";
-    c2cellWIPct.innerHTML = numberWithCommas(c2+c1,0) + "%";
-    c2cellWIPct.style.textAlign = "right";
-    c2cellWIPct.setAttribute("id","TotalCa");
-    c2cellWIPct.title = c2+c1;
+    c2cellWIPctT.innerHTML = numberWithCommas(c2+c1,0) + "%";
+    c2cellWIPctT.style.textAlign = "right";
+    c2cellWIPctT.setAttribute("id","TotalCa");
+    c2cellWIPctT.title = c2+c1;
 
     c3cellTotal.innerHTML = "Total C<sup>3</sup>";
     c3cellTotal.style.whiteSpace="nowrap";
@@ -405,7 +405,7 @@ function doClick() {
     cellTotal.innerHTML = "Total:";
     cellC2PercentT.innerHTML = numberWithCommas(totalC2,2) + "%";
     cellC2PercentT.style.textAlign = "right";
-    TcellWIPct.innerHTML = numberWithCommas(totalC2,0) + "%";
+    TcellWIPct.innerHTML = numberWithCommas(totalC2,2) + "%";
     TcellWIPct.style.textAlign = "right";
     TcellWIPct.setAttribute("id","TotalCs");
     TcellWIPct.title = totalC2;
