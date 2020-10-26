@@ -8,10 +8,15 @@ function doReset() {
 	var validC2s = game.c2;
 	var challenge;
 	var level;
-	for (myKey in validC2s) {
-		challenge = myKey;
-		level = validC2s[myKey];
+	var myElements = document.getElementsByTagName("input");
+	for (myInput in myElements) {
+	   if myInput.hasAttribute("name") {
+	      myInput.value = validC2s[myInput.name];
 	}
+//	for (myKey in validC2s) {
+//		challenge = myKey;
+//		level = validC2s[myKey];
+//	}
 }
 function updateC2(challenge,val) {
     	var hasMesmer = game.talents.mesmer.purchased;
