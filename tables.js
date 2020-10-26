@@ -6,13 +6,12 @@ function numberWithCommas(x,y) {
 function doReset() {
 	alert("Not yet....");
 	var validC2s = game.c2;
-	var i;
 	var challenge;
 	var level;
 //	for (i = 0; i < validC2s.length; i++) {
-	for (i = 0; i < 2; i++) {
-		challenge = validC2s[i][0];
-		level = validC2s[i][1];
+	for (myKey in validC2s) {
+		challenge = myKey;
+		level = validC2s[myKey];
 		alert(challenge+" "+level);
 	}
 }
