@@ -39,7 +39,7 @@ function updateWhatIf() {
 	document.getElementById("TotalC3").innerHTML = numberWithCommas(newtotal3,0) + '%';
 	document.getElementById("TotalC3").title = newtotal3;
 	var allc = allc2*(1+newtotal3/100);
-	document.getElementById("TotalCs").innerHTML = numberWithCommas(allc,0) + '%';
+	document.getElementById("TotalCs").innerHTML = numberWithCommas(allc,2) + '%';
 	document.getElementById("TotalCs").title = allc;
 }
 
