@@ -255,6 +255,13 @@ function doClick() {
      if (game['c2'][key2] !== undefined)
      {
      var c2HZE = Math.min(game['c2'][key2], getC2HZE(radHZReached));
+     var inpu = document.createElement("input");
+		inpu.style="text-align: right;";
+		inpu.size=1;
+		inpu.value=c2HZE;
+	   	inpu.setAttribute("name",key2);
+		inpu.setAttribute("onchange", "updateC2(this.name,this.value)");
+     cellWIHZE2.appendChild(inpu);
      cellChallenge2.innerHTML = specialC2s[j];
      cellChallenge2.setAttribute("sorttable_customkey", "2 "+specialC2s[j]);
      cellHZE2.innerHTML = c2HZE;
@@ -281,6 +288,13 @@ function doClick() {
      if (game['c2'][key3] !== undefined)
      {
         var c2HZE = Math.min(game['c2'][key3], radHZReached);
+        var inpu = document.createElement("input");
+		inpu.style="text-align: right;";
+		inpu.size=1;
+		inpu.value=c2HZE;
+	   	inpu.setAttribute("name",key3);
+		inpu.setAttribute("onchange", "updateC2(this.name,this.value)");
+        cellWIHZE3.appendChild(inpu);
         cellChallenge3.innerHTML = key3;
      	cellChallenge3.setAttribute("sorttable_customkey", "3 "+key3);
         cellHZE3.innerHTML = c2HZE;
@@ -302,6 +316,7 @@ function doClick() {
     var c1cellWIPct = c1rowTotal.insertCell(4);
 
     c1cellTotal.innerHTML = "Total Basic C<sup>2</sup>";
+    c1cellTotal.style.whiteSpace="nowrap";
     c1cellC2PercentT.innerHTML = numberWithCommas(c1,0) + "%";
     c1cellC2PercentT.style.textAlign = "right";
     c1cellWIPct.innerHTML = numberWithCommas(c1,0) + "%";
@@ -317,8 +332,13 @@ function doClick() {
     var c2cellWIPct = c2rowTotal.insertCell(4);
 
     c2cellTotal.innerHTML = "Total Special C<sup>2</sup>";
+    c2cellTotal.style.whiteSpace="nowrap";
     c2cellC2PercentT.innerHTML = numberWithCommas(c2,0) + "%";
     c2cellC2PercentT.style.textAlign = "right";
+    c2cellWIPct.innerHTML = numberWithCommas(c2,0) + "%";
+    c2cellWIPct.style.textAlign = "right";
+    c2cellWIPct.setAttribute("id","TotalCC");
+    c2cellWIPct.title = c2;
 	
     var c3rowTotal = footer3.insertRow(-1);
     var c3cellTotal = c3rowTotal.insertCell(0);
@@ -337,6 +357,8 @@ function doClick() {
     c2cellTotalb.innerHTML = " ";
     c2cellC2PercentTb.innerHTML = " ";
     c2cellC2PercentTb.style.textAlign = "right";
+    c2cellWIHZEb.innerHTML = " ";
+    c2cellWIPctb.innerHTML = " ";
 	
     var c2rowTotalT = footer2.insertRow(2);
     var c2cellTotalT = c2rowTotalT.insertCell(0);
@@ -346,12 +368,22 @@ function doClick() {
     var c2cellWIPctT = c2rowTotalT.insertCell(4);
 
     c2cellTotalT.innerHTML = "Total C<sup>2</sup>";
+    c2cellTotalT.style.whiteSpace="nowrap";
     c2cellC2PercentTT.innerHTML = numberWithCommas(c2+c1,0) + "%";
     c2cellC2PercentTT.style.textAlign = "right";
+    c2cellWIPct.innerHTML = numberWithCommas(c2+c1,0) + "%";
+    c2cellWIPct.style.textAlign = "right";
+    c2cellWIPct.setAttribute("id","TotalCa");
+    c2cellWIPct.title = c2+c1;
 
     c3cellTotal.innerHTML = "Total C<sup>3</sup>";
+    c3cellTotal.style.whiteSpace="nowrap";
     c3cellC2PercentT.innerHTML = numberWithCommas(c3,0) + "%";
     c3cellC2PercentT.style.textAlign = "right";
+    c3cellWIPct.innerHTML = numberWithCommas(c3,0) + "%";
+    c3cellWIPct.style.textAlign = "right";
+    c3cellWIPct.setAttribute("id","TotalC3");
+    c3cellWIPct.title = c3;
 	
     var rowTotal = footer3.insertRow(-1);
     var cellTotal = rowTotal.insertCell(0);
@@ -363,4 +395,8 @@ function doClick() {
     cellTotal.innerHTML = "Total:";
     cellC2PercentT.innerHTML = numberWithCommas(totalC2,2) + "%";
     cellC2PercentT.style.textAlign = "right";
+    TcellWIPct.innerHTML = numberWithCommas(totalC2,0) + "%";
+    TcellWIPct.style.textAlign = "right";
+    TcellWIPct.setAttribute("id","TotalCs");
+    TcellWIPct.title = totalC2;
 };
