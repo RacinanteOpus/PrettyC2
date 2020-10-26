@@ -4,7 +4,7 @@ function numberWithCommas(x,y) {
 }
 
 function doReset() {
-	alert("Not yet....");
+	//alert("Not yet....");
 	var validC2s = game.c2;
 	var challenge;
 	var level;
