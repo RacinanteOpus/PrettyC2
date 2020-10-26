@@ -304,7 +304,6 @@ function doClick() {
      	cellChallenge3.setAttribute("sorttable_customkey", "3 "+key3);
         cellHZE3.innerHTML = c2HZE;
      	cellHZE3.style.textAlign = "right";
-        var c2HZE = Math.min(game['c2'][key2], getC2HZE());
         c3 += getBasicC2(game['c2'][key3], hasMesmer,key3);
 	cellC2Percent3.innerHTML = numberWithCommas(getBasicC2(game['c2'][key3], hasMesmer, key3),0) + "%";     	
 	cellC2Percent3.style.textAlign = "right";
