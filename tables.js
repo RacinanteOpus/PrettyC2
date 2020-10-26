@@ -2,6 +2,18 @@ var game="";
 function numberWithCommas(x,y) {
     return x.toFixed(y).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+function myToggle() {
+  var x = document.getElementsByClassName("hideme");
+  for (var i = 0; i < x.length; i++) {
+  if (x[i].style.display === "none") {
+    	x[i].style.display = "inline";
+  	} else {
+    	x[i].style.display = "none";
+	}
+  }
+}
+
 function getSave() {	
     var foo = document.getElementById("foo");
     foo.value = localStorage.getItem("trimpSave");
@@ -247,7 +259,9 @@ function doClick() {
      var cellC2Percent = row.insertCell(2);
      var cellWIHZE = row.insertCell(3);
      var cellWIPct = row.insertCell(4);
-
+     cellWIHZE.setAttribute("class","hideme");
+     cellWIPct.setAttribute("class","hideme");
+	    
      if (game['c2'][key] !== undefined)
      {
         var c2HZE = Math.min(game['c2'][key], getC2HZE(radHZReached));
