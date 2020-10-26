@@ -28,6 +28,11 @@ body
   /*width: 60%;*/
 }
 
+.hideme 
+{
+  display: inline;
+}
+
 .datagrid 
 {
   font: normal 12px/150% Courier New, Courier, monospace;
