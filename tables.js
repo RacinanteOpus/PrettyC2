@@ -307,11 +307,11 @@ function doClick() {
         c3 += getBasicC2(game['c2'][key3], hasMesmer,key3);
 	cellC2Percent3.innerHTML = numberWithCommas(getBasicC2(game['c2'][key3], hasMesmer, key3),0) + "%";     	
 	cellC2Percent3.style.textAlign = "right";
-        cellWIPct3.innerHTML = numberWithCommas(getBasicC2(c2HZE, hasMesmer,key3),0) + "%";
+        cellWIPct3.innerHTML = numberWithCommas(getBasicC2(game['c2'][key3], hasMesmer,key3),0) + "%";
      	cellWIPct3.setAttribute("id",key3+"C");
      	cellWIPct3.setAttribute("name","c3");
 	cellWIPct3.style.textAlign = "right";
-     	cellWIPct3.title = getBasicC2(c2HZE, hasMesmer,key3);
+     	cellWIPct3.title = getBasicC2(game['c2'][key3], hasMesmer,key3);
      }
     }
     var footer = table.createTFoot();
