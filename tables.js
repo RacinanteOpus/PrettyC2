@@ -267,7 +267,7 @@ function doClick() {
         var c2HZE = Math.min(game['c2'][key], getC2HZE(radHZReached));
 	var inpu = document.createElement("input");
 		inpu.style="text-align: right;";
-		inpu.size=4;
+		inpu.size=3;
 		inpu.value=c2HZE;
 	   	inpu.setAttribute("name",key);
 		inpu.setAttribute("onchange", "updateC2(this.name,this.value)");
@@ -305,7 +305,7 @@ function doClick() {
      var c2HZE = Math.min(game['c2'][key2], getC2HZE(radHZReached));
      var inpu = document.createElement("input");
 		inpu.style="text-align: right;";
-		inpu.size=4;
+		inpu.size=3;
 		inpu.value=c2HZE;
 	   	inpu.setAttribute("name",key2);
 		inpu.setAttribute("onchange", "updateC2(this.name,this.value)");
@@ -345,7 +345,7 @@ function doClick() {
         var c2HZE = Math.min(game['c2'][key3], radHZReached);
         var inpu = document.createElement("input");
 		inpu.style="text-align: right;";
-		inpu.size=4;
+		inpu.size=3;
 		inpu.value=c2HZE;
 	   	inpu.setAttribute("name",key3);
 		inpu.setAttribute("onchange", "updateC2(this.name,this.value)");
