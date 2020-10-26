@@ -5,13 +5,13 @@ function numberWithCommas(x,y) {
 
 function doReset() {
 	alert("Not yet....");
-//	var validC2s = game.c2;
-//	var challenge;
-//	var level;
-//	var i;
-//	var myElement;
-//	var myElements = document.getElementsByTagName("input");
-//	
+	var validC2s = game.c2;
+	var challenge;
+	var level;
+	var i;
+	var myElement;
+	var myElements = document.getElementsByTagName("input");
+	
 //	for (i = 0; i < myElements.length; i++) {
 //	    myElement = myElements[i];
 //          if myElement.hasAttribute("name") {
