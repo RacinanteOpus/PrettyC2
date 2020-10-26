@@ -12,12 +12,12 @@ function doReset() {
 	var myElement;
 	var myElements = document.getElementsByTagName("input");
 	
-//	for (i = 0; i < myElements.length; i++) {
-//	    myElement = myElements[i];
-//          if myElement.hasAttribute("name") {
-//	       myElement.value = validC2s[myElement.name];
-//	   }
-//	}
+	for (i = 0; i < myElements.length; i++) {
+	    myElement = myElements[i];
+            if myElement.hasAttribute("name") {
+	       myElement.value = validC2s[myElement.name];
+	   }
+	}
 //	for (myKey in validC2s) {
 //		challenge = myKey;
 //		level = validC2s[myKey];
