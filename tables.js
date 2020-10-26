@@ -7,7 +7,7 @@ function myToggle() {
   var x = document.getElementsByClassName("hideme");
   for (var i = 0; i < x.length; i++) {
   if (x[i].style.display === "none") {
-    	x[i].style.display = "inline";
+    	x[i].style.display = "";
   	} else {
     	x[i].style.display = "none";
 	}
