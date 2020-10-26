@@ -2,7 +2,10 @@ var game="";
 function numberWithCommas(x,y) {
     return x.toFixed(y).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
+function getSave() {	
+    var foo = document.getElementById("foo");
+    foo.value = localStorage.getItem("trimpSave");
+}
 function doReset() {
 	//alert("Not yet....");
 	var validC2s = game.c2;
@@ -180,6 +183,7 @@ function getC2HZE(radiumHZE = 0){
 function doClick() {
     var foo = document.getElementById("foo");
     if (foo.value == "") return;
+    localStorage.setItem("trimpSave", foo.value);
 
     var result = document.getElementById("result");
     var table = document.getElementById("c2table");
