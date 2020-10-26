@@ -13,7 +13,7 @@ function doReset() {
 	var myElements = document.getElementsByTagName("input");
 	
 	for (i = 0; i < myElements.length; i++) {
-            if myElements[i].hasAttribute("name") {
+            if (myElements[i].hasAttribute("name")) {
 	       myElements[i].value = validC2s[myElements[i].name];
 	   }
 	}
