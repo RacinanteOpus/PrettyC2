@@ -30,6 +30,7 @@ body
 
 .hideme 
 {
+  display: none;
 }
 
 .datagrid 
