@@ -297,6 +297,8 @@ function doClick() {
      var cellC2Percent2 = row2.insertCell(2);
      var cellWIHZE2 = row2.insertCell(3);
      var cellWIPct2 = row2.insertCell(4);
+     cellWIHZE2.setAttribute("class","hideme");
+     cellWIPct2.setAttribute("class","hideme");
 
      if (game['c2'][key2] !== undefined)
      {
@@ -335,6 +337,8 @@ function doClick() {
      var cellC2Percent3 = row3.insertCell(2);
      var cellWIHZE3 = row3.insertCell(3);
      var cellWIPct3 = row3.insertCell(4);
+     cellWIHZE3.setAttribute("class","hideme");
+     cellWIPct3.setAttribute("class","hideme");
 
      if (game['c2'][key3] !== undefined)
      {
@@ -369,6 +373,8 @@ function doClick() {
     var c1cellC2PercentT = c1rowTotal.insertCell(2);
     var c1cellWIHZE = c1rowTotal.insertCell(3);
     var c1cellWIPct = c1rowTotal.insertCell(4);
+     c1cellWIHZE.setAttribute("class","hideme");
+     c1cellWIPct.setAttribute("class","hideme");
 
     c1cellTotal.innerHTML = "Total Basic C<sup>2</sup>";
     c1cellTotal.style.whiteSpace="nowrap";
@@ -385,6 +391,8 @@ function doClick() {
     var c2cellC2PercentT = c2rowTotal.insertCell(2);
     var c2cellWIHZE = c2rowTotal.insertCell(3);
     var c2cellWIPct = c2rowTotal.insertCell(4);
+     c2cellWIHZE.setAttribute("class","hideme");
+     c2cellWIPct.setAttribute("class","hideme");
 
     c2cellTotal.innerHTML = "Total Special C<sup>2</sup>";
     c2cellTotal.style.whiteSpace="nowrap";
@@ -401,6 +409,8 @@ function doClick() {
     var c3cellC2PercentT = c3rowTotal.insertCell(2);
     var c3cellWIHZE = c3rowTotal.insertCell(3);
     var c3cellWIPct = c3rowTotal.insertCell(4);
+     c3cellWIHZE.setAttribute("class","hideme");
+     c3cellWIPct.setAttribute("class","hideme");
 	
     var c2rowTotalb = footer2.insertRow(1);
     var c2cellTotalb = c2rowTotalb.insertCell(0);
@@ -408,6 +418,8 @@ function doClick() {
     var c2cellC2PercentTb = c2rowTotalb.insertCell(2);
     var c2cellWIHZEb = c2rowTotalb.insertCell(3);
     var c2cellWIPctb = c2rowTotalb.insertCell(4);
+     c2cellWIHZEb.setAttribute("class","hideme");
+     c2cellWIPctb.setAttribute("class","hideme");
 
     c2cellTotalb.innerHTML = " ";
     c2cellC2PercentTb.innerHTML = " ";
@@ -421,6 +433,8 @@ function doClick() {
     var c2cellC2PercentTT = c2rowTotalT.insertCell(2);
     var c2cellWIHZET = c2rowTotalT.insertCell(3);
     var c2cellWIPctT = c2rowTotalT.insertCell(4);
+     c2cellWIHZET.setAttribute("class","hideme");
+     c2cellWIPctT.setAttribute("class","hideme");
 
     c2cellTotalT.innerHTML = "Total C<sup>2</sup>";
     c2cellTotalT.style.whiteSpace="nowrap";
@@ -446,6 +460,8 @@ function doClick() {
     var cellC2PercentT = rowTotal.insertCell(2);
     var TcellWIHZE = rowTotal.insertCell(3);
     var TcellWIPct = rowTotal.insertCell(4);
+     TcellWIHZE.setAttribute("class","hideme");
+     TcellWIPct.setAttribute("class","hideme");
 
     cellTotal.innerHTML = "Total:";
     cellC2PercentT.innerHTML = numberWithCommas(totalC2,2) + "%";
