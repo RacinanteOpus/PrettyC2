@@ -331,11 +331,11 @@ function doClick() {
      c2 += getBasicC2(game['c2'][key2], hasMesmer,key2);
      cellC2Percent2.innerHTML = numberWithCommas(getBasicC2(game['c2'][key2], hasMesmer,key2),0) + "%";
      cellC2Percent2.style.textAlign = "right";
-     cellWIPct2.innerHTML = numberWithCommas(getBasicC2(c2HZE, hasMesmer,key2),0) + "%";
+     cellWIPct2.innerHTML = numberWithCommas(getBasicC2(getBasicC2(game['c2'][key2], hasMesmer,key2),0) + "%";
      cellWIPct2.setAttribute("id",key2+"C");
      cellWIPct2.setAttribute("name","c2c");
      cellWIPct2.style.textAlign = "right";
-     cellWIPct2.title = getBasicC2(c2HZE, hasMesmer,key2);
+     cellWIPct2.title = getBasicC2(getBasicC2(game['c2'][key2], hasMesmer,key2);
      }
     }
 
