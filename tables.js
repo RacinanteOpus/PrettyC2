@@ -5,15 +5,17 @@ function numberWithCommas(x,y) {
 
 function myToggle() {
   var x = document.getElementsByClassName("hideme");
-  if (x[0].style.display === "table-cell") {
-  	for (var i = 0; i < x.length; i++) {
-	    	x[i].style.display = "none";
-  	} 
-  } else {
-  	for (var i = 0; i < x.length; i++) {
-	    	x[i].style.display = "table-cell";
-  	} 
-  }
+  try {
+	  if (x[0].style.display === "table-cell") {
+  		for (var i = 0; i < x.length; i++) {
+	    		x[i].style.display = "none";
+	  	} 
+	  } else {
+  		for (var i = 0; i < x.length; i++) {
+	    		x[i].style.display = "table-cell";
+  		} 
+ 	 }
+  } catch(err) { console.error("Class Error!" +err)}
 }
 
 //function myTogglex() {
