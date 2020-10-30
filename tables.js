@@ -15,7 +15,7 @@ function myToggle() {
 	    		x[i].style.display = "table-cell";
   		} 
  	 }
-  } catch(err) { console.err("What? "+err 
+  } catch(err) { console.err("What? "+err );
   }
 }
 
