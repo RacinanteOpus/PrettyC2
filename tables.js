@@ -6,7 +6,7 @@ function numberWithCommas(x,y) {
 function myToggle() {
   var x = document.getElementsByClassName("hideme");
   try {
-	  if (x[8].style.display === "table-cell") {
+	  if (x[9].style.display === "table-cell" || x[0].style.display === "table-cell") {
   		for (var i = 0; i < x.length; i++) {
 	    		x[i].style.display = "none";
 	  	} 
