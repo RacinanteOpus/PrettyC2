@@ -16,16 +16,16 @@ function myToggle() {
   }
 }
 
-function myTogglex() {
-  var x = document.getElementsByClassName("hideme");
-  for (var i = 0; i < x.length; i++) {
-  if (x[i].style.display === "table-cell") {
-    	x[i].style.display = "none";
-  	} else {
-    	x[i].style.display = "table-cell";
-	}
-  }
-}
+//function myTogglex() {
+//  var x = document.getElementsByClassName("hideme");
+//  for (var i = 0; i < x.length; i++) {
+//  if (x[i].style.display === "table-cell") {
+//    	x[i].style.display = "none";
+//  	} else {
+//    	x[i].style.display = "table-cell";
+//	}
+//  }
+//}
 
 function getSave() {	
     var foo = document.getElementById("foo");
@@ -209,6 +209,7 @@ function doClick() {
     var foo = document.getElementById("foo");
     if (foo.value == "") return;
     localStorage.setItem("trimpSave", foo.value);
+    myToggle();
 
     var result = document.getElementById("result");
     var table = document.getElementById("c2table");
