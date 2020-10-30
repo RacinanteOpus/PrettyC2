@@ -6,7 +6,7 @@ function numberWithCommas(x,y) {
 function myToggle() {
   var x = document.getElementsByClassName("hideme");
   try {
-	  if (x[9].style.display === "table-cell" || x[0].style.display === "table-cell") {
+	  if (x[9].style.display === "table-cell") {
   		for (var i = 0; i < x.length; i++) {
 	    		x[i].style.display = "none";
 	  	} 
@@ -15,11 +15,7 @@ function myToggle() {
 	    		x[i].style.display = "table-cell";
   		} 
  	 }
-  } catch(err) { 
-  
-  		for (var i = 0; i < x.length; i++) {
-	    		x[i].style.display = "none";
-	  	} 
+  } catch(err) { console.err("What? "+err 
   }
 }
 
@@ -216,8 +212,10 @@ function doClick() {
     var foo = document.getElementById("foo");
     if (foo.value == "") return;
     localStorage.setItem("trimpSave", foo.value);
-    myToggle();
-
+    var x = document.getElementsByClassName("hideme");
+    for (var i = 0; i < x.length; i++) {
+	    		x[i].style.display = "none";
+    } 
     var result = document.getElementById("result");
     var table = document.getElementById("c2table");
     var table2 = document.getElementById("c2table2");
