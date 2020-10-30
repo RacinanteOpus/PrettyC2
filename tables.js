@@ -15,7 +15,12 @@ function myToggle() {
 	    		x[i].style.display = "table-cell";
   		} 
  	 }
-  } catch(err) { console.error("Class Error!" +err)}
+  } catch(err) { 
+  
+  		for (var i = 0; i < x.length; i++) {
+	    		x[i].style.display = "none";
+	  	} 
+  }
 }
 
 //function myTogglex() {
