@@ -251,7 +251,7 @@ function doClick() {
     var totalC2 = game.global.totalSquaredReward;
 
     if(HZReached >= 70) specialC2s.push("Trapper");
-    if(prisonClear == 1) easyC2.push("Electricity");
+    if(prisonClear >= 1) easyC2.push("Electricity");
     if(HZReached >= 120) specialC2s.push("Coordinate");
     if(HZReached >= 130) easyC2.push("Slow");
     if(HZReached >= 145) easyC2.push("Nom");
