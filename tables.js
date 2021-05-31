@@ -261,12 +261,12 @@ function doClick() {
     if(HZReached >= 425) specialC2s.push("Obliterated");
     if(totalC2 >= 4500) specialC2s.push("Eradicated");
 
-    table3.parentElement.style.display = (radHZReached >= 49) ? "" : "none";
+    table3.parentElement.style.display = (radHZReached >= 50) ? "" : "none";
     if(radHZReached >= 59) challengesU2.push("Trappapalooza");
     if(radHZReached >= 69) challengesU2.push("Wither");
     if(radHZReached >= 84) challengesU2.push("Quest");
-    if(radHZReached >= 105) challengesU2.push("Storm");
-    if(radHZReached >= 115) challengesU2.push("Berserk");
+    if(radHZReached >= 104) challengesU2.push("Storm");
+    if(radHZReached >= 114) challengesU2.push("Berserk");
 
     for (var i = 0; i < easyC2.length; i++) {
      var key = easyC2[i];
