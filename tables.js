@@ -261,7 +261,7 @@ function doClick() {
     if(HZReached >= 425) specialC2s.push("Obliterated");
     if(totalC2 >= 4500) specialC2s.push("Eradicated");
 
-    if(radHZReached > 1) { table3.style.display = ""; } else { table3.style.display = "none"; }
+    table3.parentElement.style.display = (radHZReached >= 49) ? "" : "none";
     if(radHZReached >= 59) challengesU2.push("Trappapalooza");
     if(radHZReached >= 69) challengesU2.push("Wither");
     if(radHZReached >= 84) challengesU2.push("Quest");
