@@ -9,11 +9,11 @@ function myToggle() {
 	  if (x[9].style.display === "table-cell") {
   		for (var i = 0; i < x.length; i++) {
 	    		x[i].style.display = "none";
-	  	} 
+	  	}
 	  } else {
   		for (var i = 0; i < x.length; i++) {
 	    		x[i].style.display = "table-cell";
-  		} 
+  		}
  	 }
   } catch(err) { console.err("What? "+err );
   }
@@ -30,7 +30,7 @@ function myToggle() {
 //  }
 //}
 
-function getSave() {	
+function getSave() {
     var foo = document.getElementById("foo");
     foo.value = localStorage.getItem("trimpSave");
 }
@@ -42,7 +42,7 @@ function doReset() {
 	var i;
 	var myElement;
 	var myElements = document.getElementsByTagName("input");
-	
+
 	for (i = 0; i < myElements.length; i++) {
             if (myElements[i].hasAttribute("name")) {
 	       myElements[i].value = validC2s[myElements[i].name];
@@ -78,7 +78,7 @@ function updateWhatIf() {
 	}
 	document.getElementById("TotalC").innerHTML = numberWithCommas(newtotal,0) + '%';
 	document.getElementById("TotalC").title = newtotal;
-	
+
 	x = document.getElementsByName("c2c");
 	var newtotal2 = 0;
 	for (i = 0; i < x.length; i++) {
@@ -89,7 +89,7 @@ function updateWhatIf() {
 	var allc2 = newtotal+newtotal2;
 	document.getElementById("TotalCa").innerHTML = numberWithCommas(allc2,0) + '%';
 	document.getElementById("TotalCa").title = allc2;
-	
+
 	x = document.getElementsByName("c3");
 	var newtotal3 = 0;
 	for (i = 0; i < x.length; i++) {
@@ -215,7 +215,7 @@ function doClick() {
     var x = document.getElementsByClassName("hideme");
     for (var i = 0; i < x.length; i++) {
 	    		x[i].style.display = "none";
-    } 
+    }
     var result = document.getElementById("result");
     var table = document.getElementById("c2table");
     var table2 = document.getElementById("c2table2");
@@ -232,8 +232,8 @@ function doClick() {
     var foot3 = table3.getElementsByTagName("tfoot")[0];
     body3.innerHTML = "";
     foot3.innerHTML = "";
-	
-    var c1 = 0;	
+
+    var c1 = 0;
     var c2 = 0;
     var c3 = 0;
 
@@ -260,7 +260,8 @@ function doClick() {
     if(HZReached >= 180) { easyC2.push("Watch"); easyC2.push("Lead"); }
     if(HZReached >= 425) specialC2s.push("Obliterated");
     if(totalC2 >= 4500) specialC2s.push("Eradicated");
-	
+
+    if(radHZReached > 1) { table3.style.display = ""; } else { table3.style.display = "none"; }
     if(radHZReached >= 59) challengesU2.push("Trappapalooza");
     if(radHZReached >= 69) challengesU2.push("Wither");
     if(radHZReached >= 84) challengesU2.push("Quest");
@@ -280,7 +281,7 @@ function doClick() {
      var cellWIPct = row.insertCell(4);
      cellWIHZE.setAttribute("class","hideme");
      cellWIPct.setAttribute("class","hideme");
-	    
+
      if (game['c2'][key] !== undefined)
      {
         var c2HZE = Math.min(game['c2'][key], getC2HZE(radHZReached));
@@ -374,7 +375,7 @@ function doClick() {
         cellHZE3.innerHTML = c2HZE;
      	cellHZE3.style.textAlign = "right";
         c3 += getBasicC2(game['c2'][key3], hasMesmer,key3);
-	cellC2Percent3.innerHTML = numberWithCommas(getBasicC2(game['c2'][key3], hasMesmer, key3),0) + "%";     	
+	cellC2Percent3.innerHTML = numberWithCommas(getBasicC2(game['c2'][key3], hasMesmer, key3),0) + "%";
 	cellC2Percent3.style.textAlign = "right";
         cellWIPct3.innerHTML = numberWithCommas(getBasicC2(game['c2'][key3], hasMesmer,key3),0) + "%";
      	cellWIPct3.setAttribute("id",key3+"C");
@@ -421,7 +422,7 @@ function doClick() {
     c2cellWIPct.style.textAlign = "right";
     c2cellWIPct.setAttribute("id","TotalCC");
     c2cellWIPct.title = c2;
-	
+
     var c3rowTotal = footer3.insertRow(-1);
     var c3cellTotal = c3rowTotal.insertCell(0);
     var c3cellBlank = c3rowTotal.insertCell(1);
@@ -430,7 +431,7 @@ function doClick() {
     var c3cellWIPct = c3rowTotal.insertCell(4);
      c3cellWIHZE.setAttribute("class","hideme");
      c3cellWIPct.setAttribute("class","hideme");
-	
+
     var c2rowTotalb = footer2.insertRow(1);
     var c2cellTotalb = c2rowTotalb.insertCell(0);
     var c2cellBlankb = c2rowTotalb.insertCell(1);
@@ -445,7 +446,7 @@ function doClick() {
     c2cellC2PercentTb.style.textAlign = "right";
     c2cellWIHZEb.innerHTML = " ";
     c2cellWIPctb.innerHTML = " ";
-	
+
     var c2rowTotalT = footer2.insertRow(2);
     var c2cellTotalT = c2rowTotalT.insertCell(0);
     var c2cellBlankT = c2rowTotalT.insertCell(1);
@@ -472,7 +473,7 @@ function doClick() {
     c3cellWIPct.style.textAlign = "right";
     c3cellWIPct.setAttribute("id","TotalC3");
     c3cellWIPct.title = c3;
-	
+
     var rowTotal = footer3.insertRow(-1);
     var cellTotal = rowTotal.insertCell(0);
     var cellBlank = rowTotal.insertCell(1);
