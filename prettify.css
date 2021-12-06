@@ -28,11 +28,20 @@ body
   /*width: 60%;*/
 }
 
-.hideme 
+.hideme
 {
     display:none;
 }
 
+#saveNotes
+{
+    display:none;
+}
+
+#saveNotes2
+{
+    display:none;
+}
 .datagrid 
 {
   font: normal 12px/150% Courier New, Courier, monospace;
@@ -119,4 +128,28 @@ body
 .datagrid table tbody tr:last-child td 
 {
   border-bottom: none;
+}
+
+.abovetable
+{
+  display: flex;
+  color: #DEF2F1;
+}
+
+.mgmt
+{
+  flex: 1 1 auto;
+  column-gap: 20px;
+}
+
+.notes {
+  flex: 6 1 auto;
+  color: #DEF2F1;
+  margin-left: 20px;
+}
+
+.frow {
+  column-count: 2;
+  column-gap: 20px;
+  --margin-left: 20px;
 }

@@ -10,24 +10,26 @@
   </head>
   <body>
 
-  <textarea id="foo" placeholder="Paste Trimps save string in here, ah."></textarea>
-
-  <button onclick="doClick()">
-    Get Pretty Challenge Tables
-  </button>
-  <br>
-  <button onclick="getSave()">
-    Retrieve Save
-  </button>
-  <p>
-  <button onclick="myToggle()">
-    Hide/Show What-If Scenarios
-  </button>
-  <button onclick="doReset()" class="hideme">
-    Reset What-If Scenarios
-  </button>
-
-  <p></p>
+<div class="abovetable">
+   <div class="mgmt">
+      <textarea id="foo" name="foo" autofocus onpaste="doClick()" placeholder="Paste Trimps save string in here, ah."></textarea>
+      <br>
+      <span><button onclick="doClick()">Get Pretty Challenge Tables</button>
+      <br>
+      <button onclick="getSave()">Retrieve Save</button>
+      <p>
+      <button onclick="myToggle()">Hide/Show What-If Scenarios</button><br>
+      <button onclick="doReset()" class="hideme">Reset What-If Scenarios</button>
+   </div>
+   <div class="notes">
+        <button onclick="displayThis('saveNotes')">Show save notes (May contain spoilers)</button>
+	<br>
+	<div id="saveNotes" class="noDisplay">
+		Nothing to see her until you load a save.
+	</div>
+   </div>
+</div>
+<p></p>
   <div class="datagrid">
 	<table border="0" id="challenges">
 		<tr>
@@ -87,6 +89,15 @@
 		</tr>
 	  </table>
   </div>
-
+	<p></p>
+<div class="belowTable">
+   <div class="notes">
+        <button onclick="displayThis('saveNotes2')">Show more information (May contain spoilers)</button>
+	<br>
+	<div id="saveNotes2" class="noDisplay">
+		Nothing to see her until you load a save.
+	</div>
+   </div>
+</div>
   </body>
 </html>

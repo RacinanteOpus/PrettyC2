@@ -1,4 +1,6 @@
 var game="";
+var notation=1;
+
 function numberWithCommas(x,y) {
     return x.toFixed(y).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
@@ -19,17 +21,85 @@ function myToggle() {
   }
 }
 
-//function myTogglex() {
-//  var x = document.getElementsByClassName("hideme");
-//  for (var i = 0; i < x.length; i++) {
-//  if (x[i].style.display === "table-cell") {
-//    	x[i].style.display = "none";
-//  	} else {
-//    	x[i].style.display = "table-cell";
-//	}
-//  }
-//}
+function displayThis(thisID) {
+  document.getElementById(thisID).style.display = "block";
+}
+// functions for displaying information in save in preferred format
 
+function prettify(number) {
+	var numberTmp = number;
+	if (!isFinite(number)) return "<span class='icomoon icon-infinity'></span>";
+	if (number >= 1000 && number < 10000) return Math.floor(number);
+	if (number == 0) return prettifySub(0);
+	if (number < 0) return "-" + prettify(-number);
+	if (number < 0.005) return (+number).toExponential(2);
+
+	var base = Math.floor(Math.log(number)/Math.log(1000));
+	if (base <= 0) return prettifySub(number);
+
+	if(game.options.menu.standardNotation.enabled == 5) {
+		//Thanks ZXV
+		var logBase = game.global.logNotBase;
+		var exponent = Math.log(number) / Math.log(logBase);
+		return prettifySub(exponent) + "L" + logBase;
+	}
+
+
+	number /= Math.pow(1000, base);
+	if (number >= 999.5) {
+		// 999.5 rounds to 1000 and we don’t want to show “1000K” or such
+		number /= 1000;
+		++base;
+	}
+	if (game.options.menu.standardNotation.enabled == 3){
+		var suffices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+		if (base <= suffices.length) suffix = suffices[base -1];
+		else {
+			var suf2 = (base % suffices.length) - 1;
+			if (suf2 < 0) suf2 = suffices.length - 1;
+			suffix = suffices[Math.ceil(base / suffices.length) - 2] + suffices[suf2];
+		}
+	}
+	else {
+		var suffices = [
+			'K', 'M', 'B', 'T', 'Qa', 'Qi', 'Sx', 'Sp', 'Oc', 'No', 'Dc', 'Ud',
+            'Dd', 'Td', 'Qad', 'Qid', 'Sxd', 'Spd', 'Od', 'Nd', 'V', 'Uv', 'Dv',
+            'Tv', 'Qav', 'Qiv', 'Sxv', 'Spv', 'Ov', 'Nv', 'Tg', 'Utg', 'Dtg', 'Ttg',
+            'Qatg', 'Qitg', 'Sxtg', 'Sptg', 'Otg', 'Ntg', 'Qaa', 'Uqa', 'Dqa', 'Tqa',
+            'Qaqa', 'Qiqa', 'Sxqa', 'Spqa', 'Oqa', 'Nqa', 'Qia', 'Uqi', 'Dqi',
+            'Tqi', 'Qaqi', 'Qiqi', 'Sxqi', 'Spqi', 'Oqi', 'Nqi', 'Sxa', 'Usx',
+            'Dsx', 'Tsx', 'Qasx', 'Qisx', 'Sxsx', 'Spsx', 'Osx', 'Nsx', 'Spa',
+            'Usp', 'Dsp', 'Tsp', 'Qasp', 'Qisp', 'Sxsp', 'Spsp', 'Osp', 'Nsp',
+            'Og', 'Uog', 'Dog', 'Tog', 'Qaog', 'Qiog', 'Sxog', 'Spog', 'Oog',
+            'Nog', 'Na', 'Un', 'Dn', 'Tn', 'Qan', 'Qin', 'Sxn', 'Spn', 'On',
+            'Nn', 'Ct', 'Uc'
+		];
+		var suffix;
+		if (game.options.menu.standardNotation.enabled == 2 || (game.options.menu.standardNotation.enabled == 1 && base > suffices.length) || (game.options.menu.standardNotation.enabled == 4 && base > 31))
+			suffix = "e" + ((base) * 3);
+		else if (game.options.menu.standardNotation.enabled && base <= suffices.length)
+			suffix = suffices[base-1];
+		else
+		{
+			var exponent = parseFloat(numberTmp).toExponential(2);
+			exponent = exponent.replace('+', '');
+			return exponent;
+		}
+	}
+	return prettifySub(number) + suffix;
+}	    
+
+function prettifySub(number){
+	number = parseFloat(number);
+	var floor = Math.floor(number);
+	if (number === floor) // number is an integer, just show it as-is
+		return number;
+	var precision = 3 - floor.toString().length; // use the right number of digits
+
+	return number.toFixed(3 - floor.toString().length);
+}
+
+// End preferred format functions
 function getSave() {
     var foo = document.getElementById("foo");
     foo.value = localStorage.getItem("trimpSave");
@@ -86,7 +156,7 @@ function updateWhatIf() {
 	}
 	document.getElementById("TotalCC").innerHTML = numberWithCommas(newtotal2,0) + '%';
 	document.getElementById("TotalCC").title = newtotal2;
-	var allc2 = newtotal+newtotal2;
+	var allc2 = Math.min(60000,newtotal+newtotal2);
 	document.getElementById("TotalCa").innerHTML = numberWithCommas(allc2,0) + '%';
 	document.getElementById("TotalCa").title = allc2;
 
@@ -243,6 +313,7 @@ function doClick() {
 
     game = JSON.parse(LZString.decompressFromBase64(foo.value));
     foo.value = "";
+    notation = game.options.menu.standardNotation.enabled;
 
     var hasMesmer = game.talents.mesmer.purchased;
     var HZReached = game.global.highestLevelCleared+1;
@@ -250,6 +321,70 @@ function doClick() {
     var prisonClear = game.global.prisonClear;
     var totalC2 = game.global.totalSquaredReward;
 
+// Information from save for the notes area
+    
+    var mayhem = game.global.mayhemCompletions;
+    var pande = game.global.pandCompletions;
+    var skele = new Date(game.global.lastSkeletimp);
+    var bone = new Date(game.global.lastBonePresimpt);
+    var vm = game.global.totalVoidMaps;
+    var radon = prettify(game.global.totalRadonEarned);
+    var helium = prettify(game.global.totalHeliumEarned);
+    var myStr =  "<div class='frow'>";
+        myStr += (mayhem) ? "Mayhem completions: "+mayhem+"<br>" : " ";
+	myStr += (pande) ? "Pandemonium completions: "+pande+"<br>" : " ";
+	myStr += "Helium: "+helium+"<br>";
+	myStr += (game.global.totalRadonEarned) ? "Radon: "+radon+"<br>" : " ";
+	myStr += (game.global.totalPortals > 4) ? "Void Maps: "+vm+"<br>": " ";
+	myStr += "Last Skeletimp: "+skele+"<br>"	;	
+	myStr += "Last Presimp: "+bone+"</div>"	;
+
+    var saveNotes = document.getElementById("saveNotes");
+    saveNotes.innerHTML = myStr;
+
+        myStr = "<div class='frow'>";
+	var nextCost = {};
+	    nextCost["Efficiency"] = 8 * game.generatorUpgrades.Efficiency.upgrades + 8;
+	    nextCost["Capacity"] = 32 * game.generatorUpgrades.Capacity.upgrades + 32;
+	    nextCost["Supply"] = 64 * game.generatorUpgrades.Supply.upgrades + 64;
+	    nextCost["Overclocker"] = 32 * game.generatorUpgrades.Overclocker.upgrades + 512;
+	    nextCost[""] = "";
+	    
+	var mode = "";
+	if (game.global.generatorMode == 0) {mode = "Gain Magmite"} else {
+        if (game.global.generatorMode == 1) {mode = "Gain Fuel"} else {mode = "Unknown"}};
+        if (HZReached > 229) {
+	    myStr += "Dimensional Generator Mode: " + mode + "<br>";
+	    myStr += "DG Efficiency Upgrades: " + game.generatorUpgrades.Efficiency.upgrades + "&nbsp;&nbsp;Next Upgrade cost: " + nextCost["Efficiency"] + "<br>";
+	    myStr += "DG Capacity Upgrades: " + game.generatorUpgrades.Capacity.upgrades + "&nbsp;&nbsp;Next Upgrade cost: " + nextCost["Capacity"] + "<br>";
+	    myStr += "DG Supply Upgrades: " + game.generatorUpgrades.Supply.upgrades + "&nbsp;&nbsp;Next Upgrade cost: " + nextCost["Supply"] + "<br>";
+	    myStr += "DG Supply Overclocker: " + game.generatorUpgrades.Overclocker.upgrades + "&nbsp;&nbsp;Next Upgrade cost: " + nextCost["Overclocker"] + "<br>";
+	} else { myStr += "You need to reach zone 230 to see this information.<br><br>"; }
+	
+	if (HZReached > 235) {
+	
+		var BonusLevels = game.talents.nature2.purchased ? 5 : 0;
+
+        	for (var item in game.empowerments){
+		 	var emp = game.empowerments[item];
+	 		emp.level += BonusLevels;
+	 		var oneThird = Math.floor(emp.nextUberCost / 3);
+	 		if (oneThird > 100) oneThird = 100;
+	 		if (oneThird > 50){
+	 		emp.nextUberCost -= oneThird;
+	 		}
+	 		else {
+	 		emp.nextUberCost -= 50;
+	 		}
+	 	if (emp.nextUberCost < 0) emp.nextUberCost = 0;
+	 	myStr += item + " Level: " + emp.level + "&nbsp;&nbsp;Next Cost " + emp.nextUberCost + "<br>";
+		} 
+	} else { myStr += "You need to reach zone 236 to see this information.<br><br>"; }
+    myStr += "</div>";	
+    var saveNotes2 = document.getElementById("saveNotes2");
+    saveNotes2.innerHTML = myStr;
+	
+//End notes section
     if(HZReached >= 70) specialC2s.push("Trapper");
     if(prisonClear >= 1) easyC2.push("Electricity");
     if(HZReached >= 120) specialC2s.push("Coordinate");
@@ -267,6 +402,7 @@ function doClick() {
     if(radHZReached >= 84) challengesU2.push("Quest");
     if(radHZReached >= 104) challengesU2.push("Storm");
     if(radHZReached >= 114) challengesU2.push("Berserk");
+    if(radHZReached >= 184) challengesU2.push("Glass");
 
     for (var i = 0; i < easyC2.length; i++) {
      var key = easyC2[i];
@@ -416,6 +552,11 @@ function doClick() {
 
     c2cellTotal.innerHTML = "Total Special C<sup>2</sup>";
     c2cellTotal.style.whiteSpace="nowrap";
+    var maxC2 = "";
+    if (c2>60000)
+    {
+	    maxC2=" (capped)";
+    }
     c2cellC2PercentT.innerHTML = numberWithCommas(c2,0) + "%";
     c2cellC2PercentT.style.textAlign = "right";
     c2cellWIPct.innerHTML = numberWithCommas(c2,0) + "%";
@@ -453,14 +594,15 @@ function doClick() {
     var c2cellC2PercentTT = c2rowTotalT.insertCell(2);
     var c2cellWIHZET = c2rowTotalT.insertCell(3);
     var c2cellWIPctT = c2rowTotalT.insertCell(4);
+    var c2Check = Math.min(c2+c1,60000);
      c2cellWIHZET.setAttribute("class","hideme");
      c2cellWIPctT.setAttribute("class","hideme");
 
     c2cellTotalT.innerHTML = "Total C<sup>2</sup>";
     c2cellTotalT.style.whiteSpace="nowrap";
-    c2cellC2PercentTT.innerHTML = numberWithCommas(c2+c1,0) + "%";
+    c2cellC2PercentTT.innerHTML = numberWithCommas(c2Check,0) + "%" + maxC2;
     c2cellC2PercentTT.style.textAlign = "right";
-    c2cellWIPctT.innerHTML = numberWithCommas(c2+c1,0) + "%";
+    c2cellWIPctT.innerHTML = numberWithCommas(c2Check,0) + "%" + maxC2;
     c2cellWIPctT.style.textAlign = "right";
     c2cellWIPctT.setAttribute("id","TotalCa");
     c2cellWIPctT.title = c2+c1;
