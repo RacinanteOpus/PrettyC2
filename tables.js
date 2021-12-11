@@ -1,5 +1,39 @@
+//  To do: add logic for saving and retrieving customized strings in localstorage for pasting into discord
+
 var game="";
 var notation=1;
+var nextCost = {};
+
+var hasMesmer, HZReached, radHZReached, prisonClear, totalC2, mayhem, pande, skele, bone, vm, radon, helium, 
+    fluffy, bones, mode, previewString, preferences, tempPrefs, trinkets ;
+
+function updateGlobals() {
+	notation = game.options.menu.standardNotation.enabled;
+	bones = numberWithCommas(game.global.b);
+	hasMesmer = game.talents.mesmer.purchased;
+	HZReached = game.global.highestLevelCleared+1;
+	radHZReached = (game.global.fluffyPrestige > 8) ? game.global.highestRadonLevelCleared+1 : 0;
+	prisonClear = game.global.prisonClear;
+	totalC2 = game.global.totalSquaredReward;
+	mayhem = game.global.mayhemCompletions;
+	pande = game.global.pandCompletions;
+	skele = new Date(game.global.lastSkeletimp);
+	bone = new Date(game.global.lastBonePresimpt);
+	vm = game.global.totalVoidMaps;
+	radon = prettify(game.global.totalRadonEarned);
+	helium = prettify(game.global.totalHeliumEarned);
+	scruffy = prettify(scruffyLvl(game.global.fluffyExp2));
+	fluffy = fluffyLvl(game.global.fluffyExp);
+	trinkets = numberWithCommas(game.portal.Observation.trinkets);
+	nextCost["Efficiency"] = 8 * game.generatorUpgrades.Efficiency.upgrades + 8;
+	nextCost["Capacity"] = 32 * game.generatorUpgrades.Capacity.upgrades + 32;
+	nextCost["Supply"] = 64 * game.generatorUpgrades.Supply.upgrades + 64;
+	nextCost["Overclocker"] = 32 * game.generatorUpgrades.Overclocker.upgrades + 512;
+	nextCost[""] = "";
+	
+	if (game.global.generatorMode == 0) {mode = "Gain Magmite"} else {
+        if (game.global.generatorMode == 1) {mode = "Gain Fuel"} else {mode = "Unknown"}};
+}
 
 function numberWithCommas(x,y) {
     return x.toFixed(y).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -28,7 +62,7 @@ function displayThis(thisID) {
 
 function prettify(number) {
 	var numberTmp = number;
-	if (!isFinite(number)) return "<span class='icomoon icon-infinity'></span>";
+	if (!isFinite(number)) return "&infin;";
 	if (number >= 1000 && number < 10000) return Math.floor(number);
 	if (number == 0) return prettifySub(0);
 	if (number < 0) return "-" + prettify(-number);
@@ -99,11 +133,189 @@ function prettifySub(number){
 	return number.toFixed(3 - floor.toString().length);
 }
 
-// End preferred format functions
+function scruffyLvl(number){
+	number = parseFloat(number);
+	var scruffyLevel = 0;
+	var exp = 1000;
+	do {
+		if (number > exp) {
+			number -= exp;
+			scruffyLevel +=1;
+			exp *= 4;
+		} else {
+			return scruffyLevel;
+		}
+	} while (exp > 0);
+}
+
+function fluffyLvl(number){
+	number = parseFloat(number);
+	var lvl = 0;
+	var plvl = game.global.fluffyPrestige;
+	var exp = Math.pow(5,plvl) * 1000;
+	do {
+		if (number > exp) {
+			number -= exp;
+			lvl +=1;
+			exp *= 4;
+		} else {
+			return "E"+plvl.toString()+"L"+lvl.toString();			
+		}
+	} while (exp > 0);
+}
+
+function previewUpdate() {  //called using an onChange event in a <select> statement
+	var thisSelect;
+	var theElement;
+	tempPrefs=[];
+	previewString = "";
+	var potentialItems = 10;  //# of select options
+	for (let i = 1; i < potentialItems+1; i++) {
+		theElement = document.getElementById("myString"+i);
+		thisSelect = theElement.options[theElement.selectedIndex].value;
+		switch (thisSelect) {
+			case "h": { //Helium
+				previewString += helium + " ";
+				tempPrefs.push("h");
+				break;
+			}
+			case "r": { //Radon
+				previewString += radon + " ";
+				tempPrefs.push("r");
+				break;
+			}
+			case "h1": { //U1 HZE
+				previewString += "U1:"+ HZReached + " ";
+				tempPrefs.push("h1");
+				break;
+			}
+			case "r1": { //U2 HZE
+				previewString += "U2:"+ radHZReached + " ";
+				tempPrefs.push("r1");
+				break;
+			}
+			case "f": { //Fluffy level
+				previewString += fluffy + " ";
+				tempPrefs.push("f");
+				break;
+			}
+			case "s": { //Scruffy level
+				previewString += "S" + scruffy + " ";
+				tempPrefs.push("s");
+				break;
+			}
+			case "p": { //Pandemonium completions
+				previewString += "P" + pande + " ";
+				tempPrefs.push("p");
+				break;
+			}
+			case "m": { //Mayhem completions
+				previewString += "M" + mayhem + " ";
+				tempPrefs.push("m");
+				break;
+			}
+			case "c": { //Challenge total
+				previewString += prettify(totalC2) + "% " ;
+				tempPrefs.push("c");
+				break;
+			}
+			case "t": { //Runetrinkets total
+				previewString += "RT:" + trinkets + " " ;
+				tempPrefs.push("t");
+				break;
+			}
+			case "a": { //Spire Challenge completions
+				previewString += "SA" + Math.floor(game.global.autoBattleData.maxEnemyLevel-1) + " ";
+				tempPrefs.push("a");
+				break;
+			}
+			default: {
+				break;
+			}
+		}
+	}
+	document.getElementById("preView").innerHTML = previewString;
+}
+
+var formatString = "";
+
+function saveString() {
+	localStorage.setItem("prefString", tempPrefs);
+}
+
+function getString() {
+	preferences = localStorage.getItem("prefString");
+	//console.log(preferences);
+	if (preferences === null) {
+		return;
+	}
+	previewString = "";
+	for (let i = 0; i < preferences.length; i++) {
+		thisSelect = preferences[i];
+		switch (thisSelect) {
+			case "h": { //Helium
+				previewString += helium + " ";
+				break;
+			}
+			case "r": { //Radon
+				previewString += radon + " ";
+				break;
+			}
+			case "h1": { //U1 HZE
+				previewString += "U1:"+ HZReached + " ";
+				break;
+			}
+			case "r1": { //U2 HZE
+				previewString += "U2:"+ radHZReached + " ";
+				break;
+			}
+			case "f": { //Fluffy level
+				previewString += fluffy + " ";
+				break;
+			}
+			case "s": { //Scruffy level
+				previewString += "S" + scruffy + " ";
+				break;
+			}
+			case "p": { //Pandemonium completions
+				previewString += "P" + pande + " ";
+				break;
+			}
+			case "m": { //Mayhem completions
+				previewString += "M" + mayhem + " ";
+				break;
+			}
+			case "c": { //Challenge total
+				previewString += prettify(totalC2) + "% " ;
+				break;
+			}
+			case "t": { //Challenge total
+				previewString += "RT:" + trinkets + " " ;
+				break;
+			}
+			case "a": { //Spire Challenge completions
+				previewString += "SA" + Math.floor(game.global.autoBattleData.maxEnemyLevel-1) + " ";
+				break;
+			}
+			default: {
+				break;
+			}
+		}
+	}
+	document.getElementById("ModString").innerHTML = previewString;
+}
+
+function doMyString() {
+	modal.style.display = "none";
+	document.getElementById("ModString").innerHTML = previewString;
+	saveString();
+}
+
 function getSave() {
     var foo = document.getElementById("foo");
     foo.value = localStorage.getItem("trimpSave");
 }
+
 function doReset() {
 	//alert("Not yet....");
 	var validC2s = game.c2;
@@ -313,47 +525,34 @@ function doClick() {
 
     game = JSON.parse(LZString.decompressFromBase64(foo.value));
     foo.value = "";
-    notation = game.options.menu.standardNotation.enabled;
-
-    var hasMesmer = game.talents.mesmer.purchased;
-    var HZReached = game.global.highestLevelCleared+1;
-    var radHZReached = game.global.highestRadonLevelCleared+1;
-    var prisonClear = game.global.prisonClear;
-    var totalC2 = game.global.totalSquaredReward;
-
-// Information from save for the notes area
-    
-    var mayhem = game.global.mayhemCompletions;
-    var pande = game.global.pandCompletions;
-    var skele = new Date(game.global.lastSkeletimp);
-    var bone = new Date(game.global.lastBonePresimpt);
-    var vm = game.global.totalVoidMaps;
-    var radon = prettify(game.global.totalRadonEarned);
-    var helium = prettify(game.global.totalHeliumEarned);
+    updateGlobals();
     var myStr =  "<div class='frow'>";
         myStr += (mayhem) ? "Mayhem completions: "+mayhem+"<br>" : " ";
 	myStr += (pande) ? "Pandemonium completions: "+pande+"<br>" : " ";
-	myStr += "Helium: "+helium+"<br>";
-	myStr += (game.global.totalRadonEarned) ? "Radon: "+radon+"<br>" : " ";
-	myStr += (game.global.totalPortals > 4) ? "Void Maps: "+vm+"<br>": " ";
+	myStr += (game.global.fluffyExp2) ? "Scruffy level: "+scruffy+"<br>" : " ";
+	myStr += (fluffy != "E10L10" && fluffy) ? "Fluffy level: "+fluffy+"<br>" : " ";
+	myStr += "Helium: "+helium+" HZE: "+Math.floor(game.global.highestLevelCleared+1)+", Bones: "+bones+"<br>";
+	myStr += (game.global.totalRadonEarned) ? "Radon: "+radon+" HZE: "+Math.floor(game.global.highestRadonLevelCleared+1)+"<br>" : " ";
+	myStr += (game.global.totalPortals > 4) ? "Void Maps: "+vm+" ": "";
+	myStr += (game.portal.Observation.trinkets) ? ", Runetrinkets: "+numberWithCommas(game.portal.Observation.trinkets)+"<br>": "<br>";
 	myStr += "Last Skeletimp: "+skele+"<br>"	;	
 	myStr += "Last Presimp: "+bone+"</div>"	;
+    var newStr = "<div class='frow'><b id='ModString'>";
+	newStr += (pande) ? "P"+pande+ " " : "";
+	newStr += (mayhem && mayhem < 25) ? "M"+mayhem + " ": ""; 
+	newStr += (game.global.totalRadonEarned) ? radon + " " : helium + " "; 
+	newStr += (totalC2) ?  prettify(totalC2) + "% " : "";
+	newStr += (game.global.fluffyExp2) ? "S" + scruffy + " " : fluffy + " ";
+	newStr += (game.global.autoBattleData.dust) ? "SA" + Math.floor(game.global.autoBattleData.maxEnemyLevel-1) + " " : "";
+	newStr += "</b><button id='myBtnx' onClick='modal.style.display = \"block\";'> <-- Customize this string. </button></div>";
 
     var saveNotes = document.getElementById("saveNotes");
-    saveNotes.innerHTML = myStr;
-
+    saveNotes.innerHTML = myStr+newStr;
+    getString();
+    
         myStr = "<div class='frow'>";
-	var nextCost = {};
-	    nextCost["Efficiency"] = 8 * game.generatorUpgrades.Efficiency.upgrades + 8;
-	    nextCost["Capacity"] = 32 * game.generatorUpgrades.Capacity.upgrades + 32;
-	    nextCost["Supply"] = 64 * game.generatorUpgrades.Supply.upgrades + 64;
-	    nextCost["Overclocker"] = 32 * game.generatorUpgrades.Overclocker.upgrades + 512;
-	    nextCost[""] = "";
-	    
-	var mode = "";
-	if (game.global.generatorMode == 0) {mode = "Gain Magmite"} else {
-        if (game.global.generatorMode == 1) {mode = "Gain Fuel"} else {mode = "Unknown"}};
-        if (HZReached > 229) {
+
+	if (HZReached > 229) {
 	    myStr += "Dimensional Generator Mode: " + mode + "<br>";
 	    myStr += "DG Efficiency Upgrades: " + game.generatorUpgrades.Efficiency.upgrades + "&nbsp;&nbsp;Next Upgrade cost: " + nextCost["Efficiency"] + "<br>";
 	    myStr += "DG Capacity Upgrades: " + game.generatorUpgrades.Capacity.upgrades + "&nbsp;&nbsp;Next Upgrade cost: " + nextCost["Capacity"] + "<br>";

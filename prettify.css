@@ -153,3 +153,44 @@ body
   column-gap: 20px;
   --margin-left: 20px;
 }
+
+/* The Modal (background) -based on W3shcools.com modal */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 20px; /* Location of the box */
+  left: 10%;
+  top: 10%;
+  width: 80%; /* Full width */
+  height: 80%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background: #17252A;
+  border: 10px solid #2B7A78;
+}
+
+/* Modal Content */
+.modal-content {
+  color: #DEF2F1;
+  font-size: 14px;
+  font-weight: bold;
+  margin: auto;
+  padding: 10px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
