@@ -250,7 +250,8 @@ function saveString() {
 }
 
 function getString() {
-	preferences = localStorage.getItem("prefString").split(",");
+	var stored = localStorage.getItem("prefString");
+	if (typeof stored == 'string') {preferences = stored.split(",")} else {preferences = stored};
 	//console.log(preferences);
 	if (preferences === null) {
 		return "";
