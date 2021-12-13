@@ -5,13 +5,14 @@ var notation=1;
 var nextCost = {};
 
 var hasMesmer, HZReached, radHZReached, prisonClear, totalC2, mayhem, pande, skele, bone, vm, radon, helium, 
-    fluffy, bones, mode, previewString, preferences, tempPrefs, trinkets ;
+    fluffy, bones, mode, previewString, preferences, tempPrefs, trinkets, S3 ;
 
 function updateGlobals() {
 	notation = game.options.menu.standardNotation.enabled;
 	bones = numberWithCommas(game.global.b);
 	hasMesmer = game.talents.mesmer.purchased;
 	HZReached = game.global.highestLevelCleared+1;
+	S3 = game.global.lastRadonPortal;
 	radHZReached = (game.global.fluffyPrestige > 8) ? game.global.highestRadonLevelCleared+1 : 0;
 	prisonClear = game.global.prisonClear;
 	totalC2 = game.global.totalSquaredReward;
@@ -204,6 +205,11 @@ function previewUpdate() {  //called using an onChange event in a <select> state
 				tempPrefs.push("s");
 				break;
 			}
+			case "3": { //Last U2 portal zone
+				previewString += "S3:" + S3 + " ";
+				tempPrefs.push("3");
+				break;
+			}
 			case "p": { //Pandemonium completions
 				previewString += "P" + pande + " ";
 				tempPrefs.push("p");
@@ -244,14 +250,17 @@ function saveString() {
 }
 
 function getString() {
-	preferences = localStorage.getItem("prefString");
+	preferences = localStorage.getItem("prefString").split(",");
 	//console.log(preferences);
 	if (preferences === null) {
-		return;
+		return "";
 	}
 	previewString = "";
+	var theElement;
+	var dropDown = 0;
 	for (let i = 0; i < preferences.length; i++) {
 		thisSelect = preferences[i];
+		dropDown = i+1;
 		switch (thisSelect) {
 			case "h": { //Helium
 				previewString += helium + " ";
@@ -275,6 +284,10 @@ function getString() {
 			}
 			case "s": { //Scruffy level
 				previewString += "S" + scruffy + " ";
+				break;
+			}
+			case "3": { //Last U2 portal zone
+				previewString += "S3:" + S3 + " ";
 				break;
 			}
 			case "p": { //Pandemonium completions
@@ -301,8 +314,13 @@ function getString() {
 				break;
 			}
 		}
+		theElement = document.getElementById("myString"+dropDown);
+		for (let j = 1; j < theElement.length; j++) {
+			if (theElement.options[j].value==thisSelect) {
+				theElement.options[j].selected = true;};
+		}
 	}
-	document.getElementById("ModString").innerHTML = previewString;
+	return previewString;
 }
 
 function doMyString() {
@@ -538,17 +556,21 @@ function doClick() {
 	myStr += "Last Skeletimp: "+skele+"<br>"	;	
 	myStr += "Last Presimp: "+bone+"</div>"	;
     var newStr = "<div class='frow'><b id='ModString'>";
+    var modStr = getString();
+    if (modStr == "") {
 	newStr += (pande) ? "P"+pande+ " " : "";
 	newStr += (mayhem && mayhem < 25) ? "M"+mayhem + " ": ""; 
 	newStr += (game.global.totalRadonEarned) ? radon + " " : helium + " "; 
 	newStr += (totalC2) ?  prettify(totalC2) + "% " : "";
 	newStr += (game.global.fluffyExp2) ? "S" + scruffy + " " : fluffy + " ";
 	newStr += (game.global.autoBattleData.dust) ? "SA" + Math.floor(game.global.autoBattleData.maxEnemyLevel-1) + " " : "";
+    } else {
+	newStr += modStr;
+    }
 	newStr += "</b><button id='myBtnx' onClick='modal.style.display = \"block\";'> <-- Customize this string. </button></div>";
 
     var saveNotes = document.getElementById("saveNotes");
     saveNotes.innerHTML = myStr+newStr;
-    getString();
     
         myStr = "<div class='frow'>";
 
