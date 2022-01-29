@@ -13,7 +13,7 @@ function updateGlobals() {
 	hasMesmer = game.talents.mesmer.purchased;
 	HZReached = game.global.highestLevelCleared+1;
 	S3 = game.global.lastRadonPortal;
-	radHZReached = (game.global.fluffyPrestige > 8) ? game.global.highestRadonLevelCleared+1 : 0;
+	radHZReached = game.global.highestRadonLevelCleared ? game.global.highestRadonLevelCleared + 1 : 0;
 	prisonClear = game.global.prisonClear;
 	totalC2 = game.global.totalSquaredReward;
 	mayhem = game.global.mayhemCompletions;
