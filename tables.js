@@ -606,7 +606,7 @@ function doClick() {
 	 		}
 		 	if (emp.nextUberCost < 0) emp.nextUberCost = 0;
 			var active = (emp.level>49)?" Next usage: "+emp.nextUberCost:"";
-		 	myStr += item + " Level:" + emp.level + "&nbsp;Cost:" + nextTokenLevel(emp,false) + " Transfer:" + emp.retainLevel + " Cost:" +nextTokenLevel(emp,true) + active + "<br>";
+		 	myStr += item + " Level:" + emp.level + "&nbsp;Cost:" + nextTokenLevel(emp,false) + " Transfer:" + emp.retainLevel + ((emp.retainLevel == 80)?"":" Cost:" +nextTokenLevel(emp,true)) + active + "<br>";
 		} 
 	} else { myStr += "You need to reach zone 236 to see this information.<br><br>"; }
     myStr += "</div>";	
