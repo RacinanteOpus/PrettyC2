@@ -601,10 +601,10 @@ function doClick() {
 			var forRetain=false;
 			var scale = ((forRetain) ? 2 : 4);
 			var level = ((forRetain) ? emp.retainLevel + 1 : emp.level);
-			var emp.nextCost = scale + ((level - 1) * scale);
+			var nextCost = scale + ((level - 1) * scale);
 		 	if (emp.nextUberCost < 0) emp.nextUberCost = 0;
 			var active = ((emp.level>49)?" Next activation: "+emp.nextUberCost:"";
-		 	myStr += item + " Level: " + emp.level + "&nbsp;&nbsp;Next Cost " + emp.nextCost + active + "<br>";
+		 	myStr += item + " Level: " + emp.level + "&nbsp;&nbsp;Next Cost " + nextCost + active + "<br>";
 		} 
 	} else { myStr += "You need to reach zone 236 to see this information.<br><br>"; }
     myStr += "</div>";	
