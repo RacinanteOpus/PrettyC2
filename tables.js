@@ -509,6 +509,12 @@ function getC2HZE(radiumHZE = 0){
 	return zone;
 }
 
+function nextTokenLevel (what, forRetain) {
+	var scale = ((forRetain) ? 2 : 4);
+	var level = ((forRetain) ? what.retainLevel + 1 : what.level);
+	return scale + ((level - 1) * scale);
+}
+
 function doClick() {
     var foo = document.getElementById("foo");
     if (foo.value == "") return;
@@ -598,13 +604,9 @@ function doClick() {
 	 		else {
 	 		emp.nextUberCost -= 50;
 	 		}
-			var forRetain=false;
-			var scale = ((forRetain) ? 2 : 4);
-			var level = ((forRetain) ? emp.retainLevel + 1 : emp.level);
-			var nextTokenCost = scale + ((level - 1) * scale);
 		 	if (emp.nextUberCost < 0) emp.nextUberCost = 0;
 			var active = (emp.level>49)?" Next activation: "+emp.nextUberCost:"";
-		 	myStr += item + " Level: " + emp.level + "&nbsp;&nbsp;Next Cost " + nextTokenCost + active + "<br>";
+		 	myStr += item + " Level: " + emp.level + "&nbsp;&nbsp;Next Cost " + nextTokenLevel(emp,false) + "Transfer Lvl: " + nextTokenLevel(emp,true) + active + "<br>";
 		} 
 	} else { myStr += "You need to reach zone 236 to see this information.<br><br>"; }
     myStr += "</div>";	
