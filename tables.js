@@ -598,7 +598,7 @@ function doClick() {
 	 		else {
 	 		emp.nextUberCost -= 50;
 	 		}
-			var forRetain=;
+			var forRetain=false;
 			var scale = ((forRetain) ? 2 : 4);
 			var level = ((forRetain) ? emp.retainLevel + 1 : emp.level);
 			var emp.nextCost = scale + ((level - 1) * scale);
