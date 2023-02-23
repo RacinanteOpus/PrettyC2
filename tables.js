@@ -221,6 +221,11 @@ function previewUpdate() {  //called using an onChange event in a <select> state
 				tempPrefs.push("m");
 				break;
 			}
+			case "d": { //Desolation completions
+				previewString += "D" + deso + " ";
+				tempPrefs.push("d");
+				break;
+			}
 			case "c": { //Challenge total
 				previewString += prettify(totalC2) + "% " ;
 				tempPrefs.push("c");
@@ -298,6 +303,10 @@ function getString() {
 			}
 			case "m": { //Mayhem completions
 				previewString += "M" + mayhem + " ";
+				break;
+			}
+			case "d": { //Desolation completions
+				previewString += "D" + deso + " ";
 				break;
 			}
 			case "c": { //Challenge total
