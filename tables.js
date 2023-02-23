@@ -4,7 +4,7 @@ var game="";
 var notation=1;
 var nextCost = {};
 
-var hasMesmer, HZReached, radHZReached, prisonClear, totalC2, mayhem, pande, skele, bone, vm, radon, helium, 
+var hasMesmer, HZReached, radHZReached, prisonClear, totalC2, mayhem, pande, deso, skele, bone, vm, radon, helium, 
     fluffy, bones, mode, previewString, preferences, tempPrefs, trinkets, S3 ;
 
 function updateGlobals() {
@@ -18,6 +18,7 @@ function updateGlobals() {
 	totalC2 = game.global.totalSquaredReward;
 	mayhem = game.global.mayhemCompletions;
 	pande = game.global.pandCompletions;
+	deso = game.global.desoCompletions;
 	skele = new Date(game.global.lastSkeletimp);
 	bone = new Date(game.global.lastBonePresimpt);
 	vm = game.global.totalVoidMaps;
@@ -554,6 +555,7 @@ function doClick() {
     var myStr =  "<div class='frow'>";
         myStr += (mayhem) ? "Mayhem completions: "+mayhem+"<br>" : " ";
 	myStr += (pande) ? "Pandemonium completions: "+pande+"<br>" : " ";
+	myStr += (deso) ? "Desolation completions: "+deso+"<br>" : " ";
 	myStr += (game.global.fluffyExp2) ? "Scruffy level: "+scruffy+"<br>" : " ";
 	myStr += (fluffy != "E10L10" && fluffy) ? "Fluffy level: "+fluffy+"<br>" : " ";
 	myStr += "Helium: "+helium+" HZE: "+Math.floor(game.global.highestLevelCleared+1)+", Bones: "+bones+"<br>";
